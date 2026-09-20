@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para una amiga especial 🌻</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Georgia", serif;
+    background: linear-gradient(180deg, #080808, #17100a, #211607);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ESTRELLAS */
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff4a3;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+/* PANTALLA DE ENTRADA */
+#entrada {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, #39250b, #080808 70%);
+    z-index: 20;
+    transition: 1.2s ease;
+}
+
+.caja {
+    width: min(90%, 420px);
+    padding: 35px 25px;
+    text-align: center;
+    border: 1px solid rgba(255,215,80,.5);
+    border-radius: 25px;
+    background: rgba(20,15,5,.75);
+    box-shadow: 0 0 40px rgba(255,193,7,.15);
+    backdrop-filter: blur(10px);
+}
+
+.caja h1 {
+    color: #ffd54a;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.caja p {
+    color: #ddd;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #d6a900;
+    background: #0d0d0d;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+}
+
+button {
+    margin-top: 15px;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 25px;
+    background: #ffd21f;
+    color: #161000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,210,31,.5);
+}
+
+#error {
+    color: #ff7777;
+    margin-top: 15px;
+    display: none;
+}
+
+/* CONTENIDO */
+#contenido {
+    display: none;
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 38px;
+    color: #ffd83d;
+    opacity: 0;
+    animation: aparecer 2s forwards;
+}
+
+.subtitulo {
+    color: #ddd;
+    opacity: 0;
+    animation: aparecer 2s 1s forwards;
+}
+
+/* RAMO */
+.ramo {
+    position: relative;
+    width: 300px;
+    height: 330px;
+    margin: 20px auto 10px;
+}
+
+/* TALLOS */
+.tallo {
+    position: absolute;
+    width: 7px;
+    height: 190px;
+    background: linear-gradient(to right, #315b22, #6e9b32);
+    bottom: 25px;
+    left: 50%;
+    transform-origin: bottom;
+    border-radius: 10px;
+    transform: rotate(var(--rot)) scaleY(0);
+    animation: crecerTallo 2.5s ease forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes crecerTallo {
+    to {
+        transform: rotate(var(--rot)) scaleY(1);
+    }
+}
+
+/* FLORES */
+.flor {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: calc(50% + var(--x));
+    top: var(--y);
+    transform: translate(-50%, -50%) scale(0);
+    animation: florecer 2s ease forwards;
+    animation-delay: var(--delay);
+}
+
+.petalo {
+    position: absolute;
+    width: 34px;
+    height: 52px;
+    background: #ffd21f;
+    border-radius: 50%;
+    left: 23px;
+    top: 14px;
+    transform-origin: 17px 26px;
+    box-shadow: 0 0 10px rgba(255,207,31,.5);
+}
+
+.petalo:nth-child(1) { transform: rotate(0deg) translateY(-22px); }
+.petalo:nth-child(2) { transform: rotate(45deg) translateY(-22px); }
+.petalo:nth-child(3) { transform: rotate(90deg) translateY(-22px); }
+.petalo:nth-child(4) { transform: rotate(135deg) translateY(-22px); }
+.petalo:nth-child(5) { transform: rotate(180deg) translateY(-22px); }
+.petalo:nth-child(6) { transform: rotate(225deg) translateY(-22px); }
+.petalo:nth-child(7) { transform: rotate(270deg) translateY(-22px); }
+.petalo:nth-child(8) { transform: rotate(315deg) translateY(-22px); }
+
+.centro {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #6b3d05;
+    border-radius: 50%;
+    left: 25px;
+    top: 25px;
+    z-index: 2;
+}
+
+@keyframes florecer {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0);
+        opacity: 1;
+    }
+}
+
+/* CARTA */
+.carta {
+    max-width: 700px;
+    margin: 10px auto;
+    padding: 35px 28px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,211,50,.3);
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 35px rgba(255,193,7,.12);
+
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cartaAparecer 2s 6s forwards;
+}
+
+.carta p {
+    text-align: left;
+    line-height: 1.8;
+    color: #f1f1f1;
+    font-size: 17px;
+}
+
+.firma {
+    text-align: right !important;
+    color: #ffd83d !important;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+@keyframes cartaAparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+    }
+}
+
+/* MÓVIL */
+@media(max-width:600px) {
+
+    .titulo {
+        font-size: 30px;
+    }
+
+    .ramo {
+        transform: scale(.85);
+        margin-top: 5px;
+    }
+
+    .carta {
+        padding: 25px 20px;
+    }
+
+    .carta p {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ESTRELLAS -->
+<div class="stars" id="stars"></div>
+
+<!-- ENTRADA -->
+<section id="entrada">
+
+    <div class="caja">
+
+        <h1>🌻 Una pequeña sorpresa</h1>
+
+        <p>
+            Hay algo preparado especialmente para ti.
+            <br>
+            Escribe la palabra para descubrirlo.
+        </p>
+
+        <input
+            type="text"
+            id="clave"
+            placeholder="Escribe la palabra..."
+            autocomplete="off"
+        >
+
+        <button onclick="abrirCarta()">
+            Abrir sorpresa 💛
+        </button>
+
+        <div id="error">
+            Esa no es la palabra 👀
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTENIDO -->
+<main id="contenido">
+
+    <h1 class="titulo">
+        Para una amiga muy especial 💛
+    </h1>
+
+    <p class="subtitulo">
+        Feliz 21 de septiembre 🌻
+    </p>
+
+
+    <!-- RAMO -->
+    <div class="ramo">
+
+        <!-- TALLOS -->
+        <div class="tallo" style="--rot:-28deg; --delay:.5s;"></div>
+        <div class="tallo" style="--rot:-15deg; --delay:1s;"></div>
+        <div class="tallo" style="--rot:0deg; --delay:1.3s;"></div>
+        <div class="tallo" style="--rot:15deg; --delay:1.6s;"></div>
+        <div class="tallo" style="--rot:28deg; --delay:1.9s;"></div>
+
+
+        <!-- FLORES -->
+
+        <div class="flor" style="--x:-85px; --y:60px; --delay:2.2s;">
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="centro"></div>
+        </div>
+
+        <div class="flor" style="--x:0px; --y:20px; --delay:2.7s;">
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="centro"></div>
+        </div>
+
+        <div class="flor" style="--x:85px; --y:65px; --delay:3.2s;">
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="centro"></div>
+        </div>
+
+        <div class="flor" style="--x:-45px; --y:110px; --delay:3.7s;">
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="centro"></div>
+        </div>
+
+        <div class="flor" style="--x:45px; --y:110px; --delay:4.2s;">
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="petalo"></div>
+            <div class="centro"></div>
+        </div>
+
+    </div>
+
+
+    <!-- CARTA -->
+    <section class="carta">
+
+        <p>
+            Holaaaa 😁👋
+        </p>
+
+        <p>
+            Sé que no era necesario hacer este pequeño gesto,
+            pero la verdad quería hacerlo porque has sido una muy
+            buena amiga para mí, casi como una hermana.
+            Me siento muy orgulloso y contento de haberte conocido.
+        </p>
+
+        <p>
+            Quizás no sea el más gracioso ni el que siempre tiene
+            los mejores temas para conversar, pero siempre trato
+            de que no te aburras porque eres una persona muy
+            especial para mí.
+        </p>
+
+        <p>
+            Quiero demostrarte con mis acciones que también puedes
+            confiar en mí y que, así como tú has estado para mí,
+            yo también estaré para ti cuando lo necesites.
+        </p>
+
+        <p>
+            Gracias por ser esa amiga tan especial y por formar
+            parte de mi vida.
+        </p>
+
+        <p class="firma">
+            ATT: tu amigo color canela pasión 😎
+        </p>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* CREAR ESTRELLAS */
+
+const estrellas = document.getElementById("stars");
+
+for(let i = 0; i < 80; i++){
+
+    const estrella = document.createElement("div");
+
+    estrella.className = "star";
+
+    estrella.style.left = Math.random() * 100 + "%";
+    estrella.style.top = Math.random() * 100 + "%";
+
+    estrella.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    estrellas.appendChild(estrella);
+}
+
+
+/* ABRIR CARTA */
+
+function abrirCarta(){
+
+    const input =
+        document.getElementById("clave");
+
+    const palabra =
+        input.value.trim().toLowerCase();
+
+    const entrada =
+        document.getElementById("entrada");
+
+    const contenido =
+        document.getElementById("contenido");
+
+    const error =
+        document.getElementById("error");
+
+
+    if(palabra === "ñiña"){
+
+        error.style.display = "none";
+
+        entrada.style.opacity = "0";
+
+        setTimeout(() => {
+
+            entrada.style.display = "none";
+
+            contenido.style.display = "block";
+
+        }, 1200);
+
+    } else {
+
+        error.style.display = "block";
+
+        input.value = "";
+
+        input.focus();
+
+    }
+
+}
+
+
+/* ENTER PARA ABRIR */
+
+document.getElementById("clave")
+.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+
+        abrirCarta();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
