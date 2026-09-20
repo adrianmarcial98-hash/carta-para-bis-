@@ -2,546 +2,842 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Para una amiga especial 🌻</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+*{box-sizing:border-box}
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: "Georgia", serif;
-    background: linear-gradient(180deg, #080808, #17100a, #211607);
-    color: white;
-    overflow-x: hidden;
-}
-
-/* ESTRELLAS */
-.stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #fff4a3;
-    border-radius: 50%;
-    animation: twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle {
-    from {
-        opacity: .2;
-        transform: scale(.7);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1.4);
-    }
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Georgia,serif;
+    color:#fff;
+    background:radial-gradient(circle at 50% 20%,#3b280c,#100b04 58%,#050505);
+    overflow-x:hidden;
 }
 
 /* PANTALLA DE ENTRADA */
-#entrada {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: radial-gradient(circle at center, #39250b, #080808 70%);
-    z-index: 20;
-    transition: 1.2s ease;
+#entrada{
+    position:fixed;
+    inset:0;
+    z-index:20;
+    display:grid;
+    place-items:center;
+    padding:20px;
+    background:radial-gradient(circle,#4a3008,#120b03 55%,#050505);
+    transition:1.3s;
 }
 
-.caja {
-    width: min(90%, 420px);
-    padding: 35px 25px;
-    text-align: center;
-    border: 1px solid rgba(255,215,80,.5);
-    border-radius: 25px;
-    background: rgba(20,15,5,.75);
-    box-shadow: 0 0 40px rgba(255,193,7,.15);
-    backdrop-filter: blur(10px);
+.caja{
+    width:min(92%,430px);
+    padding:38px 25px;
+    text-align:center;
+    background:#140d06dd;
+    border:1px solid #e3b93688;
+    border-radius:28px;
+    box-shadow:0 0 50px #d99d2630;
+    backdrop-filter:blur(12px);
 }
 
-.caja h1 {
-    color: #ffd54a;
-    font-size: 30px;
-    margin-bottom: 10px;
+.caja h1{
+    color:#ffd95a;
+    font-size:31px;
 }
 
-.caja p {
-    color: #ddd;
-    margin-bottom: 25px;
+.corazon{
+    font-size:42px;
 }
 
-input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #d6a900;
-    background: #0d0d0d;
-    color: white;
-    text-align: center;
-    font-size: 18px;
-    outline: none;
+.caja p{
+    line-height:1.6;
+    color:#eee;
 }
 
-button {
-    margin-top: 15px;
-    padding: 13px 30px;
-    border: none;
-    border-radius: 25px;
-    background: #ffd21f;
-    color: #161000;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .3s;
+input{
+    width:100%;
+    padding:15px;
+    border-radius:13px;
+    border:1px solid #e0b62c;
+    background:#080808;
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+    outline:none;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255,210,31,.5);
+button{
+    margin-top:15px;
+    padding:14px 30px;
+    border:0;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ffd83d,#ffb300);
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
 }
 
-#error {
-    color: #ff7777;
-    margin-top: 15px;
-    display: none;
+#error{
+    display:none;
+    color:#ff7777;
+    margin-top:14px;
 }
+
 
 /* CONTENIDO */
-#contenido {
-    display: none;
-    position: relative;
-    z-index: 2;
-    min-height: 100vh;
-    padding: 50px 20px;
-    text-align: center;
+#contenido{
+    display:none;
+    padding:45px 18px 70px;
+    text-align:center;
 }
 
-.titulo {
-    font-size: 38px;
-    color: #ffd83d;
-    opacity: 0;
-    animation: aparecer 2s forwards;
+.titulo{
+    color:#ffd85a;
+    font-size:38px;
 }
 
-.subtitulo {
-    color: #ddd;
-    opacity: 0;
-    animation: aparecer 2s 1s forwards;
+.subtitulo{
+    color:#eee;
 }
+
 
 /* RAMO */
-.ramo {
-    position: relative;
-    width: 300px;
-    height: 330px;
-    margin: 20px auto 10px;
+.bouquet{
+    position:relative;
+    width:min(92vw,560px);
+    height:430px;
+    margin:15px auto 5px;
+    filter:drop-shadow(0 18px 25px #0008);
 }
+
+
+/* ENVOLTURA */
+.wrap{
+    position:absolute;
+    left:50%;
+    bottom:5px;
+    transform:translateX(-50%) rotate(1deg);
+    width:430px;
+    height:220px;
+
+    background:linear-gradient(
+        145deg,
+        #8d6138,
+        #d4a66c 45%,
+        #6e4728
+    );
+
+    clip-path:polygon(
+        8% 0,
+        92% 0,
+        100% 100%,
+        0 100%
+    );
+
+    border-radius:0 0 45% 45%;
+}
+
+
+/* CINTA */
+.ribbon{
+    position:absolute;
+    left:50%;
+    bottom:12px;
+    transform:translateX(-50%);
+    width:150px;
+    height:32px;
+    background:#d7a52d;
+    border-radius:18px;
+    box-shadow:0 5px 8px #0005;
+}
+
+.ribbon:before,
+.ribbon:after{
+    content:"";
+    position:absolute;
+    top:12px;
+    width:95px;
+    height:60px;
+    background:#d7a52d;
+}
+
+.ribbon:before{
+    right:70%;
+    transform:rotate(25deg);
+    border-radius:5px 50% 50% 5px;
+}
+
+.ribbon:after{
+    left:70%;
+    transform:rotate(-25deg);
+    border-radius:50% 5px 5px 50%;
+}
+
 
 /* TALLOS */
-.tallo {
-    position: absolute;
-    width: 7px;
-    height: 190px;
-    background: linear-gradient(to right, #315b22, #6e9b32);
-    bottom: 25px;
-    left: 50%;
-    transform-origin: bottom;
-    border-radius: 10px;
-    transform: rotate(var(--rot)) scaleY(0);
-    animation: crecerTallo 2.5s ease forwards;
-    animation-delay: var(--delay);
+.stem{
+    position:absolute;
+    bottom:120px;
+    left:50%;
+    width:7px;
+    height:250px;
+    background:linear-gradient(
+        90deg,
+        #23451c,
+        #79a447
+    );
+    transform-origin:bottom;
+    border-radius:8px;
+    z-index:1;
 }
 
-@keyframes crecerTallo {
-    to {
-        transform: rotate(var(--rot)) scaleY(1);
+
+/* HOJAS */
+.leaf{
+    position:absolute;
+    width:85px;
+    height:34px;
+    background:linear-gradient(
+        135deg,
+        #254d1d,
+        #729747
+    );
+    border-radius:100% 0 100% 0;
+    z-index:2;
+}
+
+
+/* GIRASOLES */
+.sunflower{
+    position:absolute;
+    z-index:5;
+    transform:translate(-50%,-50%);
+    animation:bloom 1.8s ease both;
+    animation-delay:var(--d);
+}
+
+.sunflower{
+    width:120px;
+    height:120px;
+}
+
+.sunflower .p{
+    position:absolute;
+    left:43px;
+    top:4px;
+    width:34px;
+    height:65px;
+
+    background:linear-gradient(
+        #ffd72d,
+        #e9a900
+    );
+
+    border-radius:60% 60% 45% 45%;
+    transform-origin:17px 56px;
+
+    box-shadow:0 2px 5px #9b650055;
+}
+
+.sunflower .c{
+    position:absolute;
+    left:37px;
+    top:37px;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        #3a1803 10%,
+        #6a2d06 38%,
+        #241003 70%
+    );
+
+    z-index:2;
+}
+
+
+/* ROSAS */
+.rose{
+    position:absolute;
+    width:88px;
+    height:88px;
+    z-index:5;
+
+    transform:translate(-50%,-50%);
+
+    animation:bloom 1.8s ease both;
+    animation-delay:var(--d);
+}
+
+.rose .petal{
+    position:absolute;
+    inset:12px;
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle at 35% 30%,
+        #ffe06a,
+        #e6a70e 70%
+    );
+
+    box-shadow:
+        inset 4px 4px 7px #fff5,
+        inset -5px -5px 8px #9d6500;
+
+    transform:rotate(var(--r)) scale(.9);
+}
+
+.rose .core{
+    position:absolute;
+    inset:27px;
+    border-radius:50%;
+
+    background:
+    repeating-radial-gradient(
+        circle,
+        #b87403 0 5px,
+        #ffd84b 6px 9px
+    );
+}
+
+
+/* FLORES BLANCAS */
+.gyps{
+    position:absolute;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#fff8e8;
+
+    box-shadow:
+        16px 15px 0 #fff8e8,
+        30px -4px 0 #fff8e8,
+        -14px 17px 0 #fff8e8,
+        -25px -8px 0 #fff8e8;
+
+    z-index:4;
+}
+
+
+/* ANIMACIÓN */
+@keyframes bloom{
+
+    from{
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(.05)
+            rotate(-15deg);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1)
+            rotate(0);
     }
 }
 
-/* FLORES */
-.flor {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    left: calc(50% + var(--x));
-    top: var(--y);
-    transform: translate(-50%, -50%) scale(0);
-    animation: florecer 2s ease forwards;
-    animation-delay: var(--delay);
-}
-
-.petalo {
-    position: absolute;
-    width: 34px;
-    height: 52px;
-    background: #ffd21f;
-    border-radius: 50%;
-    left: 23px;
-    top: 14px;
-    transform-origin: 17px 26px;
-    box-shadow: 0 0 10px rgba(255,207,31,.5);
-}
-
-.petalo:nth-child(1) { transform: rotate(0deg) translateY(-22px); }
-.petalo:nth-child(2) { transform: rotate(45deg) translateY(-22px); }
-.petalo:nth-child(3) { transform: rotate(90deg) translateY(-22px); }
-.petalo:nth-child(4) { transform: rotate(135deg) translateY(-22px); }
-.petalo:nth-child(5) { transform: rotate(180deg) translateY(-22px); }
-.petalo:nth-child(6) { transform: rotate(225deg) translateY(-22px); }
-.petalo:nth-child(7) { transform: rotate(270deg) translateY(-22px); }
-.petalo:nth-child(8) { transform: rotate(315deg) translateY(-22px); }
-
-.centro {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: #6b3d05;
-    border-radius: 50%;
-    left: 25px;
-    top: 25px;
-    z-index: 2;
-}
-
-@keyframes florecer {
-    0% {
-        transform: translate(-50%, -50%) scale(0) rotate(-20deg);
-        opacity: 0;
-    }
-
-    70% {
-        transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(1) rotate(0);
-        opacity: 1;
-    }
-}
 
 /* CARTA */
-.carta {
-    max-width: 700px;
-    margin: 10px auto;
-    padding: 35px 28px;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,211,50,.3);
-    border-radius: 25px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 35px rgba(255,193,7,.12);
+.carta{
+    max-width:720px;
+    margin:10px auto;
+    padding:30px 25px;
 
-    opacity: 0;
-    transform: translateY(40px);
-    animation: cartaAparecer 2s 6s forwards;
+    background:#ffffff10;
+    border:1px solid #ffd94c44;
+    border-radius:25px;
+
+    backdrop-filter:blur(12px);
+
+    opacity:0;
+    transform:translateY(30px);
+
+    animation:show 1.8s 5.8s forwards;
 }
 
-.carta p {
-    text-align: left;
-    line-height: 1.8;
-    color: #f1f1f1;
-    font-size: 17px;
+.carta p{
+    text-align:left;
+    line-height:1.85;
+    font-size:17px;
 }
 
-.firma {
-    text-align: right !important;
-    color: #ffd83d !important;
-    font-weight: bold;
-    margin-top: 30px;
+.firma{
+    text-align:right!important;
+    color:#ffd85a;
+    font-weight:bold;
 }
 
-@keyframes cartaAparecer {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+@keyframes show{
+
+    to{
+        opacity:1;
+        transform:none;
     }
+
 }
 
-@keyframes aparecer {
-    to {
-        opacity: 1;
-    }
-}
 
-/* MÓVIL */
-@media(max-width:600px) {
+/* CELULAR */
+@media(max-width:600px){
 
-    .titulo {
-        font-size: 30px;
+    .titulo{
+        font-size:30px;
     }
 
-    .ramo {
-        transform: scale(.85);
-        margin-top: 5px;
+    .bouquet{
+        height:370px;
+        transform:scale(.78);
+        margin-top:-15px;
+        margin-bottom:-35px;
     }
 
-    .carta {
-        padding: 25px 20px;
+    .carta{
+        padding:24px 19px;
     }
 
-    .carta p {
-        font-size: 16px;
+    .carta p{
+        font-size:16px;
     }
+
 }
 </style>
 </head>
 
+
 <body>
 
-<!-- ESTRELLAS -->
-<div class="stars" id="stars"></div>
 
-<!-- ENTRADA -->
+<!-- PANTALLA INICIAL -->
+
 <section id="entrada">
 
-    <div class="caja">
+<div class="caja">
 
-        <h1>🌻 Una pequeña sorpresa</h1>
+<div class="corazon">🌻</div>
 
-        <p>
-            Hay algo preparado especialmente para ti.
-            <br>
-            Escribe la palabra para descubrirlo.
-        </p>
+<h1>
+Una sorpresa para ti
+</h1>
 
-        <input
-            type="text"
-            id="clave"
-            placeholder="Escribe la palabra..."
-            autocomplete="off"
-        >
+<p>
+Escribe la palabra para descubrir tu pequeño detalle.
+</p>
 
-        <button onclick="abrirCarta()">
-            Abrir sorpresa 💛
-        </button>
+<input
+id="clave"
+placeholder="Escribe la palabra..."
+autocomplete="off"
+>
 
-        <div id="error">
-            Esa no es la palabra 👀
-        </div>
+<button onclick="abrir()">
+Abrir sorpresa 💛
+</button>
 
-    </div>
+<div id="error">
+Esa no es la palabra 👀
+</div>
+
+</div>
 
 </section>
 
 
+
 <!-- CONTENIDO -->
+
 <main id="contenido">
 
-    <h1 class="titulo">
-        Para una amiga muy especial 💛
-    </h1>
+<h1 class="titulo">
+Para una amiga muy especial 💛
+</h1>
 
-    <p class="subtitulo">
-        Feliz 21 de septiembre 🌻
-    </p>
-
-
-    <!-- RAMO -->
-    <div class="ramo">
-
-        <!-- TALLOS -->
-        <div class="tallo" style="--rot:-28deg; --delay:.5s;"></div>
-        <div class="tallo" style="--rot:-15deg; --delay:1s;"></div>
-        <div class="tallo" style="--rot:0deg; --delay:1.3s;"></div>
-        <div class="tallo" style="--rot:15deg; --delay:1.6s;"></div>
-        <div class="tallo" style="--rot:28deg; --delay:1.9s;"></div>
+<p class="subtitulo">
+Un pequeño detalle para este 21 de septiembre 🌻
+</p>
 
 
-        <!-- FLORES -->
 
-        <div class="flor" style="--x:-85px; --y:60px; --delay:2.2s;">
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="centro"></div>
-        </div>
+<!-- RAMO REALISTA -->
 
-        <div class="flor" style="--x:0px; --y:20px; --delay:2.7s;">
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="centro"></div>
-        </div>
+<div class="bouquet">
 
-        <div class="flor" style="--x:85px; --y:65px; --delay:3.2s;">
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="centro"></div>
-        </div>
+<div class="wrap"></div>
 
-        <div class="flor" style="--x:-45px; --y:110px; --delay:3.7s;">
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="centro"></div>
-        </div>
-
-        <div class="flor" style="--x:45px; --y:110px; --delay:4.2s;">
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="petalo"></div>
-            <div class="centro"></div>
-        </div>
-
-    </div>
+<div class="ribbon"></div>
 
 
-    <!-- CARTA -->
-    <section class="carta">
+<!-- TALLOS -->
 
-        <p>
-            Holaaaa 😁👋
-        </p>
+<div
+class="stem"
+style="transform:rotate(-28deg)">
+</div>
 
-        <p>
-            Sé que no era necesario hacer este pequeño gesto,
-            pero la verdad quería hacerlo porque has sido una muy
-            buena amiga para mí, casi como una hermana.
-            Me siento muy orgulloso y contento de haberte conocido.
-        </p>
+<div
+class="stem"
+style="transform:rotate(-14deg)">
+</div>
 
-        <p>
-            Quizás no sea el más gracioso ni el que siempre tiene
-            los mejores temas para conversar, pero siempre trato
-            de que no te aburras porque eres una persona muy
-            especial para mí.
-        </p>
+<div
+class="stem">
+</div>
 
-        <p>
-            Quiero demostrarte con mis acciones que también puedes
-            confiar en mí y que, así como tú has estado para mí,
-            yo también estaré para ti cuando lo necesites.
-        </p>
+<div
+class="stem"
+style="transform:rotate(14deg)">
+</div>
 
-        <p>
-            Gracias por ser esa amiga tan especial y por formar
-            parte de mi vida.
-        </p>
+<div
+class="stem"
+style="transform:rotate(28deg)">
+</div>
 
-        <p class="firma">
-            ATT: tu amigo color canela pasión 😎
-        </p>
 
-    </section>
+<!-- HOJAS -->
+
+<div
+class="leaf"
+style="
+left:18%;
+bottom:150px;
+transform:rotate(-28deg)">
+</div>
+
+<div
+class="leaf"
+style="
+right:16%;
+bottom:145px;
+transform:scaleX(-1) rotate(-28deg)">
+</div>
+
+<div
+class="leaf"
+style="
+left:31%;
+bottom:110px;
+transform:rotate(-12deg)">
+</div>
+
+<div
+class="leaf"
+style="
+right:29%;
+bottom:105px;
+transform:scaleX(-1) rotate(-12deg)">
+</div>
+
+
+
+<!-- GIRASOL CENTRAL -->
+
+<div
+class="sunflower"
+style="
+left:50%;
+top:28%;
+--d:2.2s">
+
+<i class="p"
+style="transform:rotate(0deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(45deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(90deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(135deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(180deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(225deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(270deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(315deg)">
+</i>
+
+<i class="c"></i>
+
+</div>
+
+
+
+<!-- GIRASOL IZQUIERDO -->
+
+<div
+class="sunflower"
+style="
+left:27%;
+top:39%;
+--d:2.7s">
+
+<i class="p"
+style="transform:rotate(0deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(45deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(90deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(135deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(180deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(225deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(270deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(315deg)">
+</i>
+
+<i class="c"></i>
+
+</div>
+
+
+
+<!-- GIRASOL DERECHO -->
+
+<div
+class="sunflower"
+style="
+left:73%;
+top:40%;
+--d:3.1s">
+
+<i class="p"
+style="transform:rotate(0deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(45deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(90deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(135deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(180deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(225deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(270deg)">
+</i>
+
+<i class="p"
+style="transform:rotate(315deg)">
+</i>
+
+<i class="c"></i>
+
+</div>
+
+
+
+<!-- ROSA IZQUIERDA -->
+
+<div
+class="rose"
+style="
+left:39%;
+top:54%;
+--d:3.5s">
+
+<i class="petal" style="--r:0deg"></i>
+<i class="petal" style="--r:45deg"></i>
+<i class="petal" style="--r:90deg"></i>
+<i class="petal" style="--r:135deg"></i>
+<i class="petal" style="--r:180deg"></i>
+
+<i class="core"></i>
+
+</div>
+
+
+
+<!-- ROSA DERECHA -->
+
+<div
+class="rose"
+style="
+left:61%;
+top:54%;
+--d:3.8s">
+
+<i class="petal" style="--r:20deg"></i>
+<i class="petal" style="--r:65deg"></i>
+<i class="petal" style="--r:110deg"></i>
+<i class="petal" style="--r:155deg"></i>
+<i class="petal" style="--r:200deg"></i>
+
+<i class="core"></i>
+
+</div>
+
+
+
+<!-- FLORES BLANCAS -->
+
+<div
+class="gyps"
+style="left:20%;top:31%">
+</div>
+
+<div
+class="gyps"
+style="left:78%;top:34%">
+</div>
+
+<div
+class="gyps"
+style="left:34%;top:25%">
+</div>
+
+<div
+class="gyps"
+style="left:66%;top:27%">
+</div>
+
+</div>
+
+
+
+<!-- CARTA -->
+
+<section class="carta">
+
+<p>
+Holaaaa 😁👋
+</p>
+
+<p>
+Se que no era necesario hacer este pequeño gesto,
+pero la verdad quería hacerlo porque has sido una muy
+buena amiga para mí casi como una hermana.
+Me siento muy orgulloso y contento de haberte conocido.
+</p>
+
+<p>
+Quizás no sea el más gracioso ni el que siempre tiene
+los mejores temas para conversar, pero siempre trato de
+que no te aburras porque eres una persona muy especial
+para mí.
+</p>
+
+<p>
+Quiero demostrarte con mis acciones que también puedes
+confiar en mí y que así como tú has estado para mí,
+yo también estaré para ti cuando lo necesites.
+</p>
+
+<p>
+Gracias por ser esa amiga tan especial y por formar
+parte de mi vida.
+</p>
+
+<p class="firma">
+ATT: tu amigo color canela pasión 😎
+</p>
+
+</section>
 
 </main>
 
 
+
 <script>
 
-/* CREAR ESTRELLAS */
+function abrir(){
 
-const estrellas = document.getElementById("stars");
-
-for(let i = 0; i < 80; i++){
-
-    const estrella = document.createElement("div");
-
-    estrella.className = "star";
-
-    estrella.style.left = Math.random() * 100 + "%";
-    estrella.style.top = Math.random() * 100 + "%";
-
-    estrella.style.animationDelay =
-        Math.random() * 3 + "s";
-
-    estrellas.appendChild(estrella);
-}
-
-
-/* ABRIR CARTA */
-
-function abrirCarta(){
-
-    const input =
-        document.getElementById("clave");
-
-    const palabra =
-        input.value.trim().toLowerCase();
-
-    const entrada =
-        document.getElementById("entrada");
-
-    const contenido =
-        document.getElementById("contenido");
-
-    const error =
-        document.getElementById("error");
-
+    let palabra =
+        document
+        .getElementById("clave")
+        .value
+        .trim()
+        .toLowerCase();
 
     if(palabra === "ñiña"){
 
-        error.style.display = "none";
+        document
+        .getElementById("entrada")
+        .style.opacity="0";
 
-        entrada.style.opacity = "0";
+        setTimeout(()=>{
 
-        setTimeout(() => {
+            document
+            .getElementById("entrada")
+            .style.display="none";
 
-            entrada.style.display = "none";
+            document
+            .getElementById("contenido")
+            .style.display="block";
 
-            contenido.style.display = "block";
+        },1300);
 
-        }, 1200);
+    }else{
 
-    } else {
+        document
+        .getElementById("error")
+        .style.display="block";
 
-        error.style.display = "block";
-
-        input.value = "";
-
-        input.focus();
+        document
+        .getElementById("clave")
+        .value="";
 
     }
 
 }
 
 
-/* ENTER PARA ABRIR */
+document
+.getElementById("clave")
+.addEventListener("keydown",function(e){
 
-document.getElementById("clave")
-.addEventListener("keydown", function(event){
-
-    if(event.key === "Enter"){
-
-        abrirCarta();
-
+    if(e.key==="Enter"){
+        abrir();
     }
 
 });
